@@ -17,21 +17,30 @@ export default function RootLayout({
         <meta name="theme-color" content="#c0392b" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body style={{ margin: 0, fontFamily: "serif", background: "#f5f5f5" }}>
 
+      <body
+        style={{
+          margin: 0,
+          fontFamily: "serif",
+          background: "#f5f5f5",
+        }}
+      >
         {/* Header */}
         <header
           style={{
             textAlign: "center",
             padding: "20px 0",
-            position: "sticky",
-            top: 0,
             background: "#ffffff",
-            zIndex: 1000,
-            borderBottom: "1px solid #ddd"
+            borderBottom: "2px solid #c0392b",
           }}
         >
-          <h1 style={{ color: "#c0392b", fontSize: "42px", margin: 0 }}>
+          <h1
+            style={{
+              color: "#c0392b",
+              fontSize: "42px",
+              margin: 0,
+            }}
+          >
             शब्दम्
           </h1>
 
@@ -39,26 +48,14 @@ export default function RootLayout({
             उत्तर प्रदेश की बुलंद आवाज
           </p>
 
-          <nav className="nav">
-            <div
-              className="menu-icon"
-              onClick={() => {
-                const menu = document.getElementById("mobileMenu");
-                if (menu) menu.classList.toggle("show");
-              }}
-            >
-              ☰
-            </div>
-
-            <div className="nav-links" id="mobileMenu">
-              <a>UP की ताजा खबरें</a>
-              <a>संपादकीय</a>
-              <a>नौकरी-भर्ती</a>
-            </div>
+          <nav style={{ marginTop: "20px" }} className="nav-links">
+            <a>UP की ताजा खबरें</a>
+            <a>संपादकीय</a>
+            <a>नौकरी-भर्ती</a>
           </nav>
         </header>
 
-        {/* Page Content Container */}
+        {/* Main Content */}
         <main
           style={{
             maxWidth: "1100px",
@@ -66,7 +63,7 @@ export default function RootLayout({
             padding: "20px",
             background: "#ffffff",
             borderRadius: "10px",
-            boxShadow: "0 4px 20px rgba(0,0,0,0.08)"
+            boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
           }}
         >
           {children}
@@ -79,12 +76,11 @@ export default function RootLayout({
             padding: "20px",
             marginTop: "40px",
             color: "#777",
-            fontSize: "14px"
+            fontSize: "14px",
           }}
         >
           © 2026 शब्दम् | उत्तर प्रदेश की बुलंद आवाज
         </footer>
-
       </body>
     </html>
   );
