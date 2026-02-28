@@ -9,31 +9,42 @@ const handler = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Missing credentials");
+        }
+
         await connectDB();
 
-        const user = await Editor.findOne({ email: credentials?.email });
+        const user = await Editor.findOne({ email: credentials.email });
 
-        if (!user) throw new Error("No user found");
+        if (!user) {
+          throw new Error("User not found");
+        }
 
         const isMatch = await bcrypt.compare(
-          credentials!.password,
+          credentials.password,
           user.password
         );
 
-        if (!isMatch) throw new Error("Wrong password");
+        if (!isMatch) {
+          throw new Error("Invalid password");
+        }
 
         return {
-          id: user._id,
+          id: user._id.toString(),
           email: user.email,
           name: user.name,
         };
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   secret: process.env.NEXTAUTH_SECRET,
 });
 
