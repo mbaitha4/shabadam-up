@@ -1,8 +1,14 @@
 export default function Home() {
   return (
-    <div>
-      {/* Aaj Ki Mukhya Khabrein */}
-      <section style={{ marginBottom: "60px" }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "2fr 1fr",
+        gap: "40px",
+      }}
+    >
+      {/* LEFT COLUMN - MAIN NEWS */}
+      <div>
         <h2
           style={{
             fontSize: "28px",
@@ -20,19 +26,39 @@ export default function Home() {
             padding: "25px",
             borderRadius: "6px",
             boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            fontSize: "18px",
-            lineHeight: "1.7",
+            marginBottom: "25px",
           }}
         >
-          यहाँ संपादक द्वारा डाली गई मुख्य खबरें दिखेंगी।
+          <h3 style={{ marginTop: 0 }}>
+            लखनऊ में नई विकास योजना की घोषणा
+          </h3>
+          <p style={{ lineHeight: "1.7", color: "#444" }}>
+            यहाँ संपादक द्वारा डाली गई मुख्य खबरें दिखेंगी। यह एक डेमो टेक्स्ट है।
+          </p>
         </div>
-      </section>
 
-      {/* UP Samachar Sankshipt */}
-      <section>
+        <div
+          style={{
+            background: "#f9f9f9",
+            padding: "25px",
+            borderRadius: "6px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+          }}
+        >
+          <h3 style={{ marginTop: 0 }}>
+            मुख्यमंत्री ने नई योजनाओं की समीक्षा की
+          </h3>
+          <p style={{ lineHeight: "1.7", color: "#444" }}>
+            यहाँ दूसरी मुख्य खबर दिखेगी। आगे चलकर यह डेटा database से आएगा।
+          </p>
+        </div>
+      </div>
+
+      {/* RIGHT COLUMN - SHORT NEWS */}
+      <div>
         <h2
           style={{
-            fontSize: "28px",
+            fontSize: "24px",
             borderBottom: "3px solid #c0392b",
             paddingBottom: "10px",
             marginBottom: "20px",
@@ -41,19 +67,36 @@ export default function Home() {
           UP समाचार संक्षेप
         </h2>
 
-        <div
-          style={{
-            background: "#f9f9f9",
-            padding: "25px",
-            borderRadius: "6px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            fontSize: "18px",
-            lineHeight: "1.7",
-          }}
-        >
-          यहाँ संक्षेप समाचार दिखेंगे।
-        </div>
-      </section>
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          <li
+            style={{
+              marginBottom: "15px",
+              paddingBottom: "10px",
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            योगी सरकार ने नई भर्ती प्रक्रिया शुरू की।
+          </li>
+          <li
+            style={{
+              marginBottom: "15px",
+              paddingBottom: "10px",
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            वाराणसी में पर्यटन को बढ़ावा देने की योजना।
+          </li>
+          <li
+            style={{
+              marginBottom: "15px",
+              paddingBottom: "10px",
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            यूपी बोर्ड परीक्षा की नई तिथि घोषित।
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }
