@@ -7,25 +7,22 @@
 
 body {
   font-family: Georgia, "Noto Serif Devanagari", serif;
-  background-color: #f2f2f2;
+  background-color: #f5f5f5;
   color: #222;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* HEADER */
 header {
   text-align: center;
-  padding: 25px 0 15px 0;
+  padding: 25px 15px 15px 15px;
   background: #ffffff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   border-bottom: 1px solid #ddd;
 }
 
 header h1 {
   color: #b22222;
-  font-size: 42px;
+  font-size: 36px;
 }
 
 header p {
@@ -42,8 +39,9 @@ header p {
 .nav-links {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 25px;
   font-weight: 600;
+  flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -59,41 +57,46 @@ header p {
 /* MAIN CONTAINER */
 .main-container {
   max-width: 1050px;
-  margin: 30px auto;
-  padding: 25px 30px;
-  background: #ffffff;
-  border-radius: 8px;
+  margin: 20px auto;
+  padding: 20px;
 }
 
-/* GRID LAYOUT */
+/* GRID */
 .news-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 35px;
+  gap: 25px;
 }
 
-/* SECTION TITLES */
+/* CONTENT BLOCK */
+.content-block {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 6px;
+}
+
+/* TITLES */
 .section-title {
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 8px;
 }
 
 .section-line {
   height: 2px;
   background-color: #b22222;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   width: 100%;
 }
 
 /* NEWS CARD */
 .news-card {
-  margin-bottom: 25px;
-  padding-bottom: 15px;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
   border-bottom: 1px solid #eee;
 }
 
 .news-card h3 {
-  font-size: 18px;
+  font-size: 17px;
   margin-bottom: 6px;
 }
 
@@ -116,23 +119,32 @@ header p {
 /* FOOTER */
 footer {
   text-align: center;
-  margin-top: 30px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
+  margin-top: 25px;
+  padding: 15px 0;
   font-size: 13px;
   color: #777;
 }
 
-/* MOBILE RESPONSIVE */
+/* ======================= */
+/* MOBILE RESPONSIVE FIXES */
+/* ======================= */
+
 @media (max-width: 768px) {
 
-  .main-container {
-    margin: 15px;
-    padding: 20px;
+  header h1 {
+    font-size: 28px;
   }
 
   .news-layout {
     grid-template-columns: 1fr;
+  }
+
+  .content-block {
+    padding: 18px;
+  }
+
+  .section-title {
+    font-size: 20px;
   }
 
   .nav-links {
@@ -140,11 +152,7 @@ footer {
     gap: 12px;
   }
 
-  header h1 {
-    font-size: 32px;
-  }
-
-  .section-title {
-    font-size: 22px;
+  footer {
+    padding: 12px 0;
   }
 }
