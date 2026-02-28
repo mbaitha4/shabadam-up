@@ -1,61 +1,27 @@
-body {
-  margin: 0;
-  font-family: serif;
-  background: #f5f5f5;
-}
-
-.header {
-  text-align: center;
-  padding: 20px 0;
-  background: white;
-  border-bottom: 2px solid #b30000;
-}
-
-.logo {
-  color: #b30000;
-  font-size: 42px;
-  margin: 0;
-}
-
-.tagline {
-  margin-top: 5px;
-  color: #555;
-}
-
-.nav {
-  margin-top: 15px;
-}
-
-.nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  color: black;
-}
-
-.container {
+/* Homepage Layout */
+.home-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
   max-width: 1100px;
-  margin: 30px auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
 .section-title {
-  border-bottom: 2px solid #b30000;
-  padding-bottom: 10px;
+  border-bottom: 2px solid #c0392b;
+  padding-bottom: 8px;
   margin-bottom: 20px;
+  font-size: 24px;
 }
 
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
+/* News Card */
 .news-card {
-  background: white;
+  background: #fff;
   padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .news-card h3 {
@@ -64,34 +30,43 @@ body {
 
 .news-card a {
   text-decoration: none;
-  color: black;
+  color: #000;
+}
+
+.news-card a:hover {
+  color: #c0392b;
 }
 
 .news-image {
   width: 100%;
   height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
-.article-page img {
-  margin: 20px 0;
-}
-
-.footer {
-  text-align: center;
+/* Sidebar */
+.sidebar {
+  background: #fafafa;
   padding: 20px;
-  background: #eee;
-  margin-top: 40px;
+  border-radius: 10px;
+  height: fit-content;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-/* MOBILE RESPONSIVE */
+.summary-list {
+  padding-left: 20px;
+}
+
+.summary-list li {
+  margin-bottom: 10px;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .nav a {
-    display: block;
-    margin: 10px 0;
+  .home-container {
+    grid-template-columns: 1fr;
   }
 
-  .container {
-    padding: 15px;
+  .sidebar {
+    margin-top: 30px;
   }
 }
