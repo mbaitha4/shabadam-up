@@ -1,54 +1,61 @@
-export default function Header() {
+import Header from "@/components/Header";
+
+export default function Home() {
   return (
-    <header
-      style={{
-        padding: "30px 20px",
-        borderBottom: "4px solid #b30000",
-        textAlign: "center",
-      }}
-    >
-      <h1
-        style={{
-          color: "#b30000",
-          fontSize: "48px",
-          margin: 0,
-          letterSpacing: "1px",
-        }}
-      >
-        शब्दम्
-      </h1>
+    <>
+      <Header />
 
-      <p
-        style={{
-          margin: "5px 0 20px 0",
-          fontSize: "18px",
-          color: "#555",
-        }}
-      >
-        उत्तर प्रदेश की बुलंद आवाज़
-      </p>
+      <main style={{ padding: "40px" }}>
+        <section style={{ marginBottom: "50px" }}>
+          <h2
+            style={{
+              borderLeft: "5px solid #b30000",
+              paddingLeft: "10px",
+              fontSize: "26px",
+              marginBottom: "20px",
+            }}
+          >
+            आज की मुख्य खबरें
+          </h2>
 
-      <nav
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "40px",
-          fontWeight: "bold",
-          fontSize: "18px",
-        }}
-      >
-        <a href="/category/taza" style={{ textDecoration: "none", color: "#000" }}>
-          UP की ताज़ा खबरें
-        </a>
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #ccc",
+              background: "#fafafa",
+              minHeight: "120px",
+              fontSize: "16px",
+            }}
+          >
+            समाचार यहाँ दिखेंगे
+          </div>
+        </section>
 
-        <a href="/category/sampadakiya" style={{ textDecoration: "none", color: "#000" }}>
-          संपादकीय
-        </a>
+        <section>
+          <h2
+            style={{
+              borderLeft: "5px solid #b30000",
+              paddingLeft: "10px",
+              fontSize: "26px",
+              marginBottom: "20px",
+            }}
+          >
+            UP समाचार संक्षेप
+          </h2>
 
-        <a href="/category/naukri" style={{ textDecoration: "none", color: "#000" }}>
-          नौकरी-भर्ती
-        </a>
-      </nav>
-    </header>
+          <div
+            style={{
+              padding: "20px",
+              border: "1px solid #ccc",
+              background: "#fafafa",
+              minHeight: "120px",
+              fontSize: "16px",
+            }}
+          >
+            संक्षेप समाचार यहाँ दिखेंगे
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
