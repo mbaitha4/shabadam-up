@@ -1,72 +1,77 @@
-/* Homepage Layout */
-.home-container {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+body {
+  margin: 0;
+  font-family: serif;
+  background-color: #f5f5f5;
+}
+
+/* HEADER */
+.site-header {
+  text-align: center;
+  padding: 30px 20px 10px;
+  background: white;
+}
+
+.logo {
+  color: #8b0000;
+  font-size: 42px;
+  margin: 0;
+}
+
+.tagline {
+  margin-top: 6px;
+  color: #555;
+  font-size: 15px;
+}
+
+/* NAVIGATION */
+.nav-links {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
   gap: 40px;
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 0 20px;
 }
 
-.section-title {
-  border-bottom: 2px solid #c0392b;
-  padding-bottom: 8px;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-/* News Card */
-.news-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.news-card h3 {
-  margin-top: 10px;
-}
-
-.news-card a {
+.nav-links a {
   text-decoration: none;
-  color: #000;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.news-card a:hover {
-  color: #c0392b;
+.nav-links a:hover {
+  color: #8b0000;
 }
 
-.news-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
+/* Divider */
+.divider {
+  border-bottom: 2px solid #8b0000;
+  margin-top: 20px;
 }
 
-/* Sidebar */
-.sidebar {
-  background: #fafafa;
+/* MAIN PAGE CONTAINER */
+.page-container {
+  max-width: 1100px;
+  margin: 30px auto;
   padding: 20px;
-  border-radius: 10px;
-  height: fit-content;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.summary-list {
-  padding-left: 20px;
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 25px;
+  background: #eee;
+  margin-top: 40px;
+  font-size: 14px;
 }
 
-.summary-list li {
-  margin-bottom: 10px;
-}
-
-/* Mobile Responsive */
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .home-container {
-    grid-template-columns: 1fr;
+  .nav-links {
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .sidebar {
-    margin-top: 30px;
+  .logo {
+    font-size: 32px;
   }
 }
