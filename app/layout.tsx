@@ -13,71 +13,78 @@ export default function RootLayout({
 }) {
   return (
     <html lang="hi">
-      <body
-        style={{
-          margin: 0,
-          fontFamily: "'Noto Serif Devanagari', serif",
-          backgroundColor: "#ffffff",
-          color: "#111",
-        }}
-      >
-        {/* HEADER */}
+      <head>
+        <meta name="theme-color" content="#c0392b" />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
+      <body style={{ margin: 0, fontFamily: "serif", background: "#f5f5f5" }}>
+
+        {/* Header */}
         <header
           style={{
             textAlign: "center",
-            padding: "30px 20px 20px",
-            borderBottom: "2px solid #c0392b",
+            padding: "20px 0",
+            position: "sticky",
+            top: 0,
+            background: "#ffffff",
+            zIndex: 1000,
+            borderBottom: "1px solid #ddd"
           }}
         >
-          <h1
-            style={{
-              color: "#c0392b",
-              fontSize: "44px",
-              margin: 0,
-            }}
-          >
+          <h1 style={{ color: "#c0392b", fontSize: "42px", margin: 0 }}>
             शब्दम्
           </h1>
 
-          <p
-            style={{
-              marginTop: "8px",
-              color: "#555",
-              fontSize: "14px",
-            }}
-          >
+          <p style={{ marginTop: "8px", color: "#555" }}>
             उत्तर प्रदेश की बुलंद आवाज
           </p>
 
-          <nav
-            style={{
-              marginTop: "20px",
-              fontSize: "18px",
-              fontWeight: 600,
-            }}
-          >
-            <span style={{ margin: "0 18px", cursor: "pointer" }}>
-              UP की ताज़ा खबरें
-            </span>
-            <span style={{ margin: "0 18px", cursor: "pointer" }}>
-              संपादकीय
-            </span>
-            <span style={{ margin: "0 18px", cursor: "pointer" }}>
-              नौकरी-भर्ती
-            </span>
+          <nav className="nav">
+            <div
+              className="menu-icon"
+              onClick={() => {
+                const menu = document.getElementById("mobileMenu");
+                if (menu) menu.classList.toggle("show");
+              }}
+            >
+              ☰
+            </div>
+
+            <div className="nav-links" id="mobileMenu">
+              <a>UP की ताजा खबरें</a>
+              <a>संपादकीय</a>
+              <a>नौकरी-भर्ती</a>
+            </div>
           </nav>
         </header>
 
-        {/* MAIN CONTENT */}
+        {/* Page Content Container */}
         <main
           style={{
             maxWidth: "1100px",
             margin: "40px auto",
-            padding: "0 20px",
+            padding: "20px",
+            background: "#ffffff",
+            borderRadius: "10px",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.08)"
           }}
         >
           {children}
         </main>
+
+        {/* Footer */}
+        <footer
+          style={{
+            textAlign: "center",
+            padding: "20px",
+            marginTop: "40px",
+            color: "#777",
+            fontSize: "14px"
+          }}
+        >
+          © 2026 शब्दम् | उत्तर प्रदेश की बुलंद आवाज
+        </footer>
+
       </body>
     </html>
   );
