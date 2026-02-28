@@ -1,20 +1,30 @@
+import Header from "@/components/Header";
+
 export default function Home() {
   return (
-    <main style={{ padding: "40px", fontFamily: "serif" }}>
-      <h1 style={{ color: "#b30000", fontSize: "40px" }}>शब्दम्</h1>
-      <p>उत्तर प्रदेश की बुलंद आवाज़</p>
+    <>
+      <Header />
 
-      <hr style={{ margin: "30px 0" }} />
+      <main style={{ padding: "40px" }}>
+        <h2>आज की मुख्य खबरें</h2>
 
-      <h2>UP की ताज़ा खबरें</h2>
-      <ul>
-        <li>आज की मुख्य खबरें</li>
-        <li>UP समाचार संक्षेप</li>
-      </ul>
+        <div style={{
+          height: "150px",
+          border: "1px solid #ddd",
+          marginBottom: "30px"
+        }}>
+          समाचार यहाँ दिखेंगे
+        </div>
 
-      <h2>संपादकीय</h2>
+        <h2>UP समाचार संक्षेप</h2>
 
-      <h2>नौकरी-भर्ती</h2>
-    </main>
+        <div style={{
+          height: "150px",
+          border: "1px solid #ddd"
+        }}>
+          संक्षेप समाचार यहाँ दिखेंगे
+        </div>
+      </main>
+    </>
   );
 }
