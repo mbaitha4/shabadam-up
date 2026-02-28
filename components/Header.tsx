@@ -1,29 +1,53 @@
 export default function Header() {
   return (
-    <header style={{
-      padding: "30px",
-      borderBottom: "2px solid #ccc"
-    }}>
-      <h1 style={{
-        color: "#b30000",
-        fontSize: "42px",
-        margin: 0
-      }}>
+    <header
+      style={{
+        padding: "30px 20px",
+        borderBottom: "4px solid #b30000",
+        textAlign: "center",
+      }}
+    >
+      <h1
+        style={{
+          color: "#b30000",
+          fontSize: "48px",
+          margin: 0,
+          letterSpacing: "1px",
+        }}
+      >
         शब्दम्
       </h1>
 
-      <p style={{ margin: "5px 0 20px 0" }}>
+      <p
+        style={{
+          margin: "5px 0 20px 0",
+          fontSize: "18px",
+          color: "#555",
+        }}
+      >
         उत्तर प्रदेश की बुलंद आवाज़
       </p>
 
-      <nav style={{
-        display: "flex",
-        gap: "20px",
-        fontWeight: "bold"
-      }}>
-        <a href="/category/taza">UP की ताज़ा खबरें</a>
-        <a href="/category/sampadakiya">संपादकीय</a>
-        <a href="/category/naukri">नौकरी-भर्ती</a>
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "40px",
+          fontWeight: "bold",
+          fontSize: "18px",
+        }}
+      >
+        <a href="/category/taza" style={{ textDecoration: "none", color: "#000" }}>
+          UP की ताज़ा खबरें
+        </a>
+
+        <a href="/category/sampadakiya" style={{ textDecoration: "none", color: "#000" }}>
+          संपादकीय
+        </a>
+
+        <a href="/category/naukri" style={{ textDecoration: "none", color: "#000" }}>
+          नौकरी-भर्ती
+        </a>
       </nav>
     </header>
   );
