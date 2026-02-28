@@ -19,7 +19,7 @@ export default function RootLayout({
           <p className="tagline">उत्तर प्रदेश की बुलंद आवाज</p>
 
           <nav className="nav">
-            <Link href="/">UP की ताजा खबरें</Link>
+            <Link href="/up-taza-khabre">UP की ताज़ा खबरें</Link>
             <Link href="/sampadakiya">संपादकीय</Link>
             <Link href="/naukri">नौकरी-भर्ती</Link>
           </nav>
