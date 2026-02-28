@@ -75,7 +75,6 @@ export default function RootLayout({
           </footer>
         </div>
 
-        {children}
 
       </body>
     </html>
