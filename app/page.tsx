@@ -1,13 +1,14 @@
 export default function Home() {
   return (
-    <main style={{ padding: "30px" }}>
-      <section style={{ marginBottom: "50px" }}>
+    <div>
+      {/* Aaj Ki Mukhya Khabrein */}
+      <section style={{ marginBottom: "60px" }}>
         <h2
           style={{
+            fontSize: "28px",
             borderBottom: "3px solid #c0392b",
             paddingBottom: "10px",
-            fontSize: "26px",
-            color: "#222",
+            marginBottom: "20px",
           }}
         >
           आज की मुख्य खबरें
@@ -15,26 +16,26 @@ export default function Home() {
 
         <div
           style={{
-            border: "1px solid #ccc",
+            background: "#f9f9f9",
             padding: "25px",
-            minHeight: "150px",
-            marginTop: "20px",
-            backgroundColor: "#fafafa",
+            borderRadius: "6px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             fontSize: "18px",
-            color: "#333",
+            lineHeight: "1.7",
           }}
         >
           यहाँ संपादक द्वारा डाली गई मुख्य खबरें दिखेंगी।
         </div>
       </section>
 
+      {/* UP Samachar Sankshipt */}
       <section>
         <h2
           style={{
+            fontSize: "28px",
             borderBottom: "3px solid #c0392b",
             paddingBottom: "10px",
-            fontSize: "26px",
-            color: "#222",
+            marginBottom: "20px",
           }}
         >
           UP समाचार संक्षेप
@@ -42,18 +43,17 @@ export default function Home() {
 
         <div
           style={{
-            border: "1px solid #ccc",
+            background: "#f9f9f9",
             padding: "25px",
-            minHeight: "150px",
-            marginTop: "20px",
-            backgroundColor: "#fafafa",
+            borderRadius: "6px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             fontSize: "18px",
-            color: "#333",
+            lineHeight: "1.7",
           }}
         >
           यहाँ संक्षेप समाचार दिखेंगे।
         </div>
       </section>
-    </main>
+    </div>
   );
 }
