@@ -1,4 +1,4 @@
-/* Reset */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,15 +6,16 @@
 }
 
 body {
-  font-family: serif;
-  background-color: #f4f4f4;
+  font-family: Georgia, "Noto Serif Devanagari", serif;
+  background-color: #f2f2f2;
   color: #222;
+  line-height: 1.6;
 }
 
-/* Header */
+/* HEADER */
 header {
   text-align: center;
-  padding: 20px 0;
+  padding: 25px 0 15px 0;
   background: #ffffff;
   position: sticky;
   top: 0;
@@ -23,99 +24,102 @@ header {
 }
 
 header h1 {
-  color: #c0392b;
+  color: #b22222;
   font-size: 42px;
-  margin: 0;
 }
 
 header p {
-  margin-top: 8px;
-  color: #555;
+  margin-top: 6px;
+  color: #666;
+  font-size: 14px;
 }
 
-/* Navigation */
+/* NAVIGATION */
 .nav {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .nav-links {
   display: flex;
   justify-content: center;
   gap: 30px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .nav-links a {
-  cursor: pointer;
-  transition: color 0.2s ease;
+  text-decoration: none;
+  color: #222;
+  transition: 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: #c0392b;
+  color: #b22222;
 }
 
-.menu-icon {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-/* Section Titles */
-.section-title {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.section-line {
-  border-bottom: 2px solid #c0392b;
-  margin-bottom: 20px;
-}
-
-/* Main Container */
+/* MAIN CONTAINER */
 .main-container {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 30px;
+  max-width: 1050px;
+  margin: 30px auto;
+  padding: 25px 30px;
   background: #ffffff;
   border-radius: 8px;
 }
 
-/* Two Column Layout */
+/* GRID LAYOUT */
 .news-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 40px;
+  gap: 35px;
 }
 
-/* News Cards */
+/* SECTION TITLES */
+.section-title {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.section-line {
+  height: 2px;
+  background-color: #b22222;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* NEWS CARD */
 .news-card {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
 
 .news-card h3 {
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 6px;
 }
 
 .news-card p {
   color: #555;
+  font-size: 14px;
 }
 
-/* Sidebar List */
+/* SIDEBAR */
 .sidebar ul {
   list-style: disc;
-  padding-left: 20px;
+  padding-left: 18px;
 }
 
 .sidebar li {
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
-/* Footer */
+/* FOOTER */
 footer {
   text-align: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #ddd;
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
   color: #777;
 }
 
@@ -123,7 +127,7 @@ footer {
 @media (max-width: 768px) {
 
   .main-container {
-    margin: 20px;
+    margin: 15px;
     padding: 20px;
   }
 
@@ -131,28 +135,16 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .nav {
-    text-align: right;
-    padding-right: 20px;
-  }
-
   .nav-links {
-    display: none;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 15px;
-    text-align: center;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-icon {
-    display: block;
+    gap: 12px;
   }
 
   header h1 {
     font-size: 32px;
+  }
+
+  .section-title {
+    font-size: 22px;
   }
 }
