@@ -8,20 +8,30 @@ export async function POST(req: Request) {
 
     await connectDB();
 
-    const db = mongoose.connection.db;
+    // 👇 Tell TypeScript db will exist
+    const db = mongoose.connection.db!;
     const user = await db.collection("editors").findOne({ email });
 
     if (!user) {
-      return NextResponse.json({ success: false, message: "User not found" });
+      return NextResponse.json({
+        success: false,
+        message: "User not found",
+      });
     }
 
     if (user.password !== password) {
-      return NextResponse.json({ success: false, message: "Wrong password" });
+      return NextResponse.json({
+        success: false,
+        message: "Wrong password",
+      });
     }
 
     return NextResponse.json({ success: true });
 
   } catch (error) {
-    return NextResponse.json({ success: false, message: "Server error" });
+    return NextResponse.json({
+      success: false,
+      message: "Server error",
+    });
   }
 }
