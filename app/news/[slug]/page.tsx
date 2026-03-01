@@ -1,31 +1,19 @@
-import { newsData } from "../../data/news";
-import Image from "next/image";
+import { connectDB } from "@/lib/mongodb";
+import News from "@/models/News";
 
-export default function NewsDetail({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const article = newsData.find(
-    (item) => item.slug === params.slug
-  );
+export default async function NewsPage({ params }: any) {
+  await connectDB();
 
-  if (!article) {
-    return <div>Article Not Found</div>;
-  }
+  const article = await News.findOne({ slug: params.slug });
+
+  if (!article) return <div>Not Found</div>;
 
   return (
-    <div className="article-page">
+    <div style={{ padding: 40 }}>
       <h1>{article.title}</h1>
-
-      <Image
-        src={article.image}
-        alt={article.title}
-        width={800}
-        height={400}
-        className="news-image"
-      />
-
+      {article.image && (
+        <img src={article.image} width="400" />
+      )}
       <p>{article.content}</p>
     </div>
   );
