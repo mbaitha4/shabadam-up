@@ -1,23 +1,30 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-import mongoose from "mongoose";
+import Article from "@/models/Article";
 
 export async function POST(req: Request) {
   await connectDB();
 
-  const { title, content } = await req.json();
+  const { title, content, category, image } = await req.json();
 
-  const db = mongoose.connection.db;
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
-  if (!db) {
-    return NextResponse.json({ success: false });
-  }
-
-  await db.collection("articles").insertOne({
+  await Article.create({
     title,
     content,
-    createdAt: new Date(),
+    category,
+    image,
+    slug,
   });
 
   return NextResponse.json({ success: true });
+}
+
+export async function GET() {
+  await connectDB();
+  const articles = await Article.find().sort({ createdAt: -1 });
+  return NextResponse.json(articles);
 }
