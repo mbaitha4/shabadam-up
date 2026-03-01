@@ -1,42 +1,80 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 
 export default function AdminPage() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    const isAuth = localStorage.getItem("admin");
-    if (isAuth === "true") setLoggedIn(true);
-  }, []);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
 
-  const handleLogin = () => {
-    if (password === "admin123") {
-      localStorage.setItem("admin", "true");
+  const login = async () => {
+    const res = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
       setLoggedIn(true);
     } else {
-      alert("Wrong password");
+      alert("Wrong credentials");
     }
+  };
+
+  const publish = async () => {
+    await fetch("/api/news", {
+      method: "POST",
+      body: JSON.stringify({ title, content, image }),
+    });
+
+    alert("Article Published");
   };
 
   if (!loggedIn) {
     return (
-      <div style={{ padding: "40px" }}>
+      <div style={{ padding: 40 }}>
         <h2>Editor Login</h2>
         <input
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br /><br />
+        <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleLogin}>Login</button>
+        <br /><br />
+        <button onClick={login}>Login</button>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h2>Editor Dashboard</h2>
-      <p>You can now add articles here.</p>
+    <div style={{ padding: 40 }}>
+      <h2>Add Article</h2>
+      <input
+        placeholder="Title"
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <br /><br />
+      <textarea
+        placeholder="Content"
+        rows={6}
+        onChange={(e) => setContent(e.target.value)}
+      />
+      <br /><br />
+      <input
+        placeholder="Image URL"
+        onChange={(e) => setImage(e.target.value)}
+      />
+      <br /><br />
+      <button onClick={publish}>Publish</button>
     </div>
   );
 }
