@@ -1,43 +1,53 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleLogin = async (e: any) => {
     e.preventDefault();
 
-    await signIn("credentials", {
-      email,
-      password,
-      callbackUrl: "/admin",
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
+
+    const data = await res.json();
+
+    if (data.success) {
+      router.push("/admin");
+    } else {
+      alert(data.message);
+    }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "50px auto" }}>
+    <div style={{ padding: 40 }}>
       <h2>Editor Login</h2>
+
       <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
-          required
           onChange={(e) => setEmail(e.target.value)}
-          style={{ width: "100%", padding: 10, marginBottom: 10 }}
+          required
         />
+        <br /><br />
+
         <input
           type="password"
           placeholder="Password"
-          required
           onChange={(e) => setPassword(e.target.value)}
-          style={{ width: "100%", padding: 10, marginBottom: 10 }}
+          required
         />
-        <button type="submit" style={{ padding: 10, width: "100%" }}>
-          Login
-        </button>
+        <br /><br />
+
+        <button type="submit">Login</button>
       </form>
     </div>
   );
