@@ -1,3 +1,4 @@
+import { SessionProvider } from "next-auth/react";
 import "./globals.css";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -32,7 +33,11 @@ export default function RootLayout({
 
         {/* PAGE CONTENT */}
         <main className="page-container">
-          {children}
+          <body>
+  <SessionProvider>
+    {children}
+  </SessionProvider>
+</body>
         </main>
 
         {/* FOOTER */}
