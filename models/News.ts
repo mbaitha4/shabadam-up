@@ -11,4 +11,4 @@ const NewsSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.News ||
-  mongoose.model("News", NewsSchema);
+  mongoose.model("News", NewsSchema, "articles");
