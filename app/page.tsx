@@ -5,31 +5,59 @@ import News from "@/models/News";
 export default async function HomePage() {
   await connectDB();
 
-  const news = await News.find().sort({ createdAt: -1 });
+  // Use lean() for Next.js compatibility
+  const news = await News.find().sort({ createdAt: -1 }).lean();
+
+  // Convert _id to string (important for Next.js)
+  const formattedNews = news.map((item: any) => ({
+    ...item,
+    _id: item._id.toString(),
+  }));
 
   return (
     <div className="home-grid">
-
       {/* LEFT SIDE - MAIN NEWS */}
       <div className="main-news">
         <h2 className="section-title">आज की मुख्य खबरें</h2>
 
-        {news.map((item: any) => (
+        {formattedNews.map((item: any) => (
           <Link
             key={item._id}
-            href={`/news/${item.slug}`}
+            href={`/news/${item._id}`}
             className="news-card"
           >
+            {/* Image */}
             {item.image && (
-              <img src={item.image} alt={item.title} />
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: "100%",
+                  marginBottom: "10px",
+                  borderRadius: "8px",
+                }}
+              />
             )}
+
+            {/* Title */}
             <h3>{item.title}</h3>
+
+            {/* Date */}
+            <p style={{ color: "gray", fontSize: "13px" }}>
+              {new Date(item.createdAt).toLocaleString()}
+            </p>
+
+            {/* Category */}
+            <p style={{ fontSize: "13px", fontWeight: "bold" }}>
+              Category: {item.category}
+            </p>
+
+            {/* Short Description */}
             <p>
-              {item.content.substring(0, 120)}...
+              {item.content?.substring(0, 120)}...
             </p>
           </Link>
         ))}
-
       </div>
 
       {/* RIGHT SIDE - SUMMARY */}
@@ -37,12 +65,15 @@ export default async function HomePage() {
         <h2 className="section-title">UP समाचार संक्षेप</h2>
 
         <ul className="summary-list">
-          {news.slice(0, 5).map((item: any) => (
-            <li key={item._id}>{item.title}</li>
+          {formattedNews.slice(0, 5).map((item: any) => (
+            <li key={item._id}>
+              <Link href={`/news/${item._id}`}>
+                {item.title}
+              </Link>
+            </li>
           ))}
         </ul>
       </div>
-
     </div>
   );
 }
