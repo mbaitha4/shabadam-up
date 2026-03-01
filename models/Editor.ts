@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
 const EditorSchema = new mongoose.Schema({
-  name: String,
-  email: { type: String, unique: true },
+  email: String,
   password: String,
 });
 
