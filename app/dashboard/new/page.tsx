@@ -2,99 +2,99 @@
 
 import { useState } from "react";
 
-export default function NewArticle() {
+export default function NewArticle(){
 
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("mukhya");
-  const [image, setImage] = useState("");
+  const [title,setTitle]=useState("");
+  const [summary,setSummary]=useState("");
+  const [content,setContent]=useState("");
+  const [category,setCategory]=useState("mukhya");
+  const [image,setImage]=useState("");
 
-  const handleSubmit = async (e:any) => {
+  const handleImage=(e:any)=>{
 
-    e.preventDefault();
+    const file=e.target.files[0];
+    const reader=new FileReader();
 
-    await fetch("/api/articles", {
-      method: "POST",
-      body: JSON.stringify({
-        title,
-        summary,
-        content,
-        category,
-        image,
-      }),
-    });
-
-    alert("Article Published ✅");
-
-    setTitle("");
-    setSummary("");
-    setContent("");
-  };
-
-  const handleImage = (e:any) => {
-
-    const file = e.target.files[0];
-
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
+    reader.onloadend=()=>{
       setImage(reader.result as string);
     };
 
     reader.readAsDataURL(file);
   };
 
-  return (
+  const publish=async(e:any)=>{
 
-    <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
+    e.preventDefault();
 
-      <h1>Add New Article</h1>
+    await fetch("/api/articles",{
+      method:"POST",
+      body:JSON.stringify({
+        title,
+        summary,
+        content,
+        category,
+        image
+      })
+    });
 
-      <form onSubmit={handleSubmit}>
+    alert("Article Published");
+
+    setTitle("");
+    setSummary("");
+    setContent("");
+  };
+
+  return(
+
+    <div style={{maxWidth:"800px",margin:"auto"}}>
+
+      <h1>Add Article</h1>
+
+      <form onSubmit={publish}>
 
         <input
           placeholder="Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", marginBottom: "10px" }}
+          onChange={(e)=>setTitle(e.target.value)}
         />
 
         <textarea
-          placeholder="Summary (Short news for homepage)"
+          placeholder="Summary"
           value={summary}
-          onChange={(e) => setSummary(e.target.value)}
-          style={{ width: "100%", marginBottom: "10px" }}
+          onChange={(e)=>setSummary(e.target.value)}
         />
 
         <textarea
-          placeholder="Full Article Content"
+          placeholder="Full Article"
           value={content}
-          onChange={(e) => setContent(e.target.value)}
-          style={{ width: "100%", height: "150px", marginBottom: "10px" }}
+          onChange={(e)=>setContent(e.target.value)}
         />
 
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          style={{ marginBottom: "10px" }}
+          onChange={(e)=>setCategory(e.target.value)}
         >
-          <option value="mukhya">मुख्य खबरें</option>
-          <option value="sankshep">UP समाचार संक्षेप</option>
+
+          <option value="mukhya">मुख्य खबर</option>
+          <option value="sankshep">संक्षेप</option>
           <option value="sampadakiya">संपादकीय</option>
           <option value="naukri">नौकरी</option>
+
         </select>
 
-        <br />
+        <br/>
 
-        <input type="file" onChange={handleImage} />
+        <input type="file" onChange={handleImage}/>
 
-        <br /><br />
+        <br/><br/>
 
-        <button type="submit">Publish</button>
+        <button type="submit">
+          Publish
+        </button>
 
       </form>
 
     </div>
+
   );
 }
