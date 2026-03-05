@@ -6,58 +6,37 @@ export default async function HomePage() {
 
   await connectDB();
 
-  const mukhyaNews = await News.find({ category: "mukhya" })
-    .sort({ createdAt: -1 })
-    .lean();
-
-  const sankhepNews = await News.find({ category: "sankhep" })
-    .sort({ createdAt: -1 })
-    .limit(5)
-    .lean();
-
-  const formattedMukhya = mukhyaNews.map((item: any) => ({
-    ...item,
-    _id: item._id.toString(),
-  }));
-
-  const formattedSankhep = sankhepNews.map((item: any) => ({
-    ...item,
-    _id: item._id.toString(),
-  }));
+  const news = await News.find().sort({ createdAt: -1 });
 
   return (
+
     <div className="home-grid">
 
       {/* MAIN NEWS */}
+
       <div className="main-news">
 
-        <h2 className="section-title">आज की मुख्य खबरें</h2>
+        <h2>आज की मुख्य खबरें</h2>
 
-        {formattedMukhya.map((item: any) => (
+        {news.map((item:any) => (
 
           <Link
             key={item._id}
-            href={`/news/${item.slug}`}
+            href={`/news/${item._id}`}
             className="news-card"
           >
 
             {item.image && (
-              <img
-                src={item.image}
-                alt={item.title}
-                style={{ width: "100%", marginBottom: "10px" }}
-              />
+              <img src={item.image} alt={item.title} />
             )}
 
             <h3>{item.title}</h3>
 
-            <p style={{ color: "gray", fontSize: "13px" }}>
+            <p style={{ color: "gray", fontSize: "14px" }}>
               {new Date(item.createdAt).toLocaleString()}
             </p>
 
-            <p>
-              {item.content?.substring(0, 120)}...
-            </p>
+            <p>{item.summary}</p>
 
           </Link>
 
@@ -65,22 +44,21 @@ export default async function HomePage() {
 
       </div>
 
-      {/* SUMMARY */}
+
+      {/* RIGHT SIDE SUMMARY */}
 
       <div className="sidebar">
 
-        <h2 className="section-title">UP समाचार संक्षेप</h2>
+        <h2>UP समाचार संक्षेप</h2>
 
-        <ul className="summary-list">
+        <ul>
 
-          {formattedSankhep.map((item: any) => (
+          {news.slice(0,5).map((item:any) => (
 
             <li key={item._id}>
-
-              <Link href={`/news/${item.slug}`}>
+              <Link href={`/news/${item._id}`}>
                 {item.title}
               </Link>
-
             </li>
 
           ))}
@@ -90,5 +68,6 @@ export default async function HomePage() {
       </div>
 
     </div>
+
   );
 }
