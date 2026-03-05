@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 const NewsSchema = new mongoose.Schema(
   {
     title: String,
+    summary: String,
     content: String,
     image: String,
-    slug: String,
+    category: String,
   },
   { timestamps: true }
 );
