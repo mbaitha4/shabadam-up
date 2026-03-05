@@ -6,15 +6,18 @@ export async function POST(req: Request) {
 
   await connectDB();
 
-  const { title, summary, content, category, image } = await req.json();
+  const body = await req.json();
 
-  const article = await News.create({
-    title,
-    summary,
-    content,
-    category,
-    image,
-  });
+  const article = await News.create(body);
 
   return NextResponse.json(article);
+}
+
+export async function GET() {
+
+  await connectDB();
+
+  const articles = await News.find().sort({ createdAt: -1 });
+
+  return NextResponse.json(articles);
 }
