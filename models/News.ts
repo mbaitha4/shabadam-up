@@ -1,15 +1,37 @@
-import mongoose from "mongoose";
+import { connectDB } from "@/lib/mongodb";
+import News from "@/models/News";
 
-const NewsSchema = new mongoose.Schema(
-  {
-    title: String,
-    summary: String,
-    content: String,
-    image: String,
-    category: String,
-  },
-  { timestamps: true }
-);
+export default async function ArticlePage({ params }: any) {
 
-export default mongoose.models.News ||
-  mongoose.model("News", NewsSchema, "articles");
+  await connectDB();
+
+  const article = await News.findById(params.id).lean();
+
+  if (!article) return <div>Article not found</div>;
+
+  return (
+
+    <div style={{ maxWidth: "900px", margin: "auto", padding: "20px" }}>
+
+      <h1>{article.title}</h1>
+
+      <p style={{ color: "gray" }}>
+        {new Date(article.createdAt).toLocaleString()}
+      </p>
+
+      {article.image && (
+        <img
+          src={article.image}
+          alt={article.title}
+          style={{ width: "100%", margin: "20px 0" }}
+        />
+      )}
+
+      <div style={{ fontSize: "18px", lineHeight: "1.7" }}>
+        {article.content}
+      </div>
+
+    </div>
+
+  );
+}
