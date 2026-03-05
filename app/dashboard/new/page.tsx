@@ -2,110 +2,99 @@
 
 import { useState } from "react";
 
-export default function NewArticlePage() {
+export default function NewArticle() {
+
   const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("mukhya");
   const [image, setImage] = useState("");
-  const [message, setMessage] = useState("");
 
-  // Convert image to base64
-  const handleImageUpload = (e: any) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  const handleSubmit = async (e:any) => {
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const res = await fetch("/api/articles", {
+    await fetch("/api/articles", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         title,
+        summary,
         content,
         category,
         image,
       }),
     });
 
-    const data = await res.json();
+    alert("Article Published ✅");
 
-    if (data.success) {
-      setMessage("Article Published ✅");
-      setTitle("");
-      setContent("");
-      setCategory("");
-      setImage("");
-    } else {
-      setMessage("Error publishing article");
-    }
+    setTitle("");
+    setSummary("");
+    setContent("");
+  };
+
+  const handleImage = (e:any) => {
+
+    const file = e.target.files[0];
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setImage(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
-    <div style={{ padding: "40px", maxWidth: "600px" }}>
+
+    <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
+
       <h1>Add New Article</h1>
 
       <form onSubmit={handleSubmit}>
+
         <input
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
-          style={{ width: "100%", padding: "10px", marginBottom: "15px" }}
+          style={{ width: "100%", marginBottom: "10px" }}
         />
 
         <textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-          rows={6}
-          style={{ width: "100%", padding: "10px", marginBottom: "15px" }}
+          placeholder="Summary (Short news for homepage)"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          style={{ width: "100%", marginBottom: "10px" }}
         />
 
-        {/* Category Dropdown */}
+        <textarea
+          placeholder="Full Article Content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          style={{ width: "100%", height: "150px", marginBottom: "10px" }}
+        />
+
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          required
-          style={{ width: "100%", padding: "10px", marginBottom: "15px" }}
+          style={{ marginBottom: "10px" }}
         >
-          <option value="">Select Category</option>
           <option value="mukhya">मुख्य खबरें</option>
-          <option value="sankhep">UP समाचार संक्षेप</option>
+          <option value="sankshep">UP समाचार संक्षेप</option>
           <option value="sampadakiya">संपादकीय</option>
-          <option value="naukri">नौकरी-भर्ती</option>
+          <option value="naukri">नौकरी</option>
         </select>
 
-        {/* Image Upload */}
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-          style={{ marginBottom: "15px" }}
-        />
+        <br />
 
-        {image && (
-          <img
-            src={image}
-            alt="preview"
-            style={{ width: "100%", marginBottom: "15px" }}
-          />
-        )}
+        <input type="file" onChange={handleImage} />
 
-        <button type="submit" style={{ padding: "10px 20px" }}>
-          Publish
-        </button>
+        <br /><br />
+
+        <button type="submit">Publish</button>
+
       </form>
 
-      <p style={{ marginTop: "20px", color: "green" }}>{message}</p>
     </div>
   );
 }
