@@ -1,20 +1,37 @@
 import { connectDB } from "@/lib/mongodb";
 import News from "@/models/News";
 
-export default async function NewsPage({ params }: any) {
+export default async function ArticlePage({ params }: any) {
+
   await connectDB();
 
-  const article = await News.findOne({ slug: params.slug });
+  const article = await News.findOne({ slug: params.slug }).lean();
 
-  if (!article) return <div>Not Found</div>;
+  if (!article) {
+    return <div>Article not found</div>;
+  }
 
   return (
-    <div style={{ padding: 40 }}>
+    <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
+      
       <h1>{article.title}</h1>
+
+      <p style={{ color: "gray" }}>
+        {new Date(article.createdAt).toLocaleString()}
+      </p>
+
       {article.image && (
-        <img src={article.image} width="400" />
+        <img
+          src={article.image}
+          alt={article.title}
+          style={{ width: "100%", margin: "20px 0" }}
+        />
       )}
-      <p>{article.content}</p>
+
+      <div style={{ fontSize: "18px", lineHeight: "1.6" }}>
+        {article.content}
+      </div>
+
     </div>
   );
 }
