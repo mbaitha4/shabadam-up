@@ -37,7 +37,7 @@ export default async function HomePage() {
 
           <Link
             key={item._id}
-            href={`/news/${item._id}`}
+            href={`/news/${item.slug}`}
             className="news-card"
           >
 
@@ -77,7 +77,7 @@ export default async function HomePage() {
 
             <li key={item._id}>
 
-              <Link href={`/news/${item._id}`}>
+              <Link href={`/news/${item.slug}`}>
                 {item.title}
               </Link>
 
