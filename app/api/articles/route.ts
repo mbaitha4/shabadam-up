@@ -1,30 +1,20 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-import Article from "@/models/Article";
+import News from "@/models/News";
 
 export async function POST(req: Request) {
+
   await connectDB();
 
-  const { title, content, category, image } = await req.json();
+  const { title, summary, content, category, image } = await req.json();
 
-  const slug = title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
-  await Article.create({
+  const article = await News.create({
     title,
+    summary,
     content,
     category,
     image,
-    slug,
   });
 
-  return NextResponse.json({ success: true });
-}
-
-export async function GET() {
-  await connectDB();
-  const articles = await Article.find().sort({ createdAt: -1 });
-  return NextResponse.json(articles);
+  return NextResponse.json(article);
 }
