@@ -8,66 +8,57 @@ export default async function HomePage() {
 
   const news = await News.find().sort({ createdAt: -1 });
 
+  const mukhya = news.filter((n:any)=>n.category==="mukhya");
+  const sankshep = news.filter((n:any)=>n.category==="sankshep");
+
   return (
 
     <div className="home-grid">
-
-      {/* MAIN NEWS */}
 
       <div className="main-news">
 
         <h2>आज की मुख्य खबरें</h2>
 
-        {news.map((item:any) => (
+        {mukhya.map((item:any)=>(
+          <Link key={item._id} href={`/news/${item._id}`}>
 
-          <Link
-            key={item._id}
-            href={`/news/${item._id}`}
-            className="news-card"
-          >
+            <div className="news-card">
 
-            {item.image && (
-              <img src={item.image} alt={item.title} />
-            )}
+              {item.image && (
+                <img src={item.image} alt={item.title} />
+              )}
 
-            <h3>{item.title}</h3>
+              <h3>{item.title}</h3>
 
-            <p style={{ color: "gray", fontSize: "14px" }}>
-              {new Date(item.createdAt).toLocaleString()}
-            </p>
+              <p>{item.summary}</p>
 
-            <p>{item.summary}</p>
+              <p style={{fontSize:"12px",color:"gray"}}>
+                {new Date(item.createdAt).toLocaleString()}
+              </p>
+
+            </div>
 
           </Link>
-
         ))}
 
       </div>
-
-
-      {/* RIGHT SIDE SUMMARY */}
 
       <div className="sidebar">
 
         <h2>UP समाचार संक्षेप</h2>
 
         <ul>
-
-          {news.slice(0,5).map((item:any) => (
-
+          {sankshep.map((item:any)=>(
             <li key={item._id}>
               <Link href={`/news/${item._id}`}>
                 {item.title}
               </Link>
             </li>
-
           ))}
-
         </ul>
 
       </div>
 
     </div>
-
   );
 }
